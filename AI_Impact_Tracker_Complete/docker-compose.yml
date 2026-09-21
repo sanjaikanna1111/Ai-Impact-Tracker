@@ -1,0 +1,12 @@
+services:
+  backend:
+    build: ./backend
+    env_file: ./backend/.env
+    ports: ["8000:8000"]
+    volumes: ["./backend:/app"]
+  frontend:
+    build: ./frontend
+    environment:
+      NEXT_PUBLIC_API_BASE: http://localhost:8000/api
+    ports: ["3000:3000"]
+    depends_on: [backend]
